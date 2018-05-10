@@ -2,23 +2,15 @@ const
   request = require('request'),
   APP_URL = process.env.APP_URL || 'http://localhost:5000/',
   JIRA_URL = process.env.JIRA_URL || 'https://nowthis.atlassian.net',
-  OAuth = require('oauth').OAuth;
-
-let privateKey = Buffer.from(process.env.RSA_PRIVATE_KEY, 'base64').toString();
-// if (APP_URL == 'http://localhost:5000/') {
-//   let fs = require('fs')
-//   privateKey = fs.readFileSync('./rsa-key.pem', 'utf8')
-//   privateKey = privateKey.toString()
-// } else {
-//   privateKey = process.env.RSA_PRIVATE_KEY
-// }
+  OAuth = require('oauth').OAuth,
+  settings = require('../settings.js');
 
 //TODO: use jira_url here
 var consumer =
-  new OAuth(`${JIRA_URL}/plugins/servlet/oauth/request-token`,
-                  `${JIRA_URL}/plugins/servlet/oauth/access-token`,
-                  'neptune-the-dodle',
-                  privateKey,
+  new OAuth(`${settings.JIRA_URL}/plugins/servlet/oauth/request-token`,
+                  `${settings.JIRA_URL}/plugins/servlet/oauth/access-token`,
+                  settings.jiraConsumerKey,
+                  settings.RSA_PRIVATE_KEY,
                   "1.0",
                   `${APP_URL}auth/atlassian-oauth/callback`,
                   "RSA-SHA1",
@@ -59,11 +51,11 @@ var functions = {
       let data = JSON.stringify({
         body: comment
       })
-      
+
       helpers.makeJiraRequest(user, url, 'post', data).then(success => {
         return resolve(success)
       })
-      
+
     });
   },
   getTicketInfo: function(user, url) {

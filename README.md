@@ -35,7 +35,7 @@ To setup this application you'll need:
 4. **Setup a Jira Application Link**
   - Go to https://YOUR-JIRA-SUBDOMAIN.atlassian.net/plugins/servlet/applinks/listApplicationLinks
   - Enter the URL of your heroku app and click "Create New Link" (if you get a "no response" error, just click Continue)
-    
+
     - Application Name = whatever you'd like, or just use "Jira Comments in Slack"  
     - Display Url = your Heroku app URL
     - Request Token URL, Access Token URL, and Authorize URL = https://YOUR-HEROKU-APP-NAME.herokuapp.com/auth/atlassian-oauth
@@ -49,7 +49,7 @@ To setup this application you'll need:
   - Sign up by messaging the bot you created with the word "signup" -- click the link that the bot responds with to Auth with Jira
 7. **Usage**
   - @mention your username in a Jira comment to get a message in Slack
-  
+
 ## Development
 - When working locally, create a .env file in your local environment with the same Key=Value pairs that were used in Step 3 separated by new lines. Example: JIRA_URL='https://YOUR-URL.atlassian.net'  
 - Start up Mongo with ```mongod``` in your terminal
